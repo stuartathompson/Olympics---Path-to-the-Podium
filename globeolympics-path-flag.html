@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://beta.images.theglobeandmail.com/media/www/css/global.fonts.css">
+
+<script src="d3.v2.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+#gi{
+	width:800px;
+	margin:0 auto;
+}
+#gi h1{
+	font-family:"PrattHeavy",sans-serif;
+	font-size:37px;
+	line-height:1;
+	font-weight: normal;
+	margin:0 0 10px;
+	text-align: center;
+}
+#gi p{
+	text-align: center;
+	width:600px;
+	margin:10px auto;
+	font-size:16px;
+	font-family:"OpenSans",Arial,Helvetica,sans-serif;
+	line-height:1.8;
+}
+#viz{
+	margin-top:50px;
+}
+.medal{
+	background-color:white;
+	border:1px solid #ececec;
+}
+/* Smartphones -------------------------------*/
+@media screen and (max-width: 480px) {
+
+}
+</style>
+<div id="gi">
+<script type="text/javascript">
+$('document').ready(function(){
+var canadaMedals = [
+  {
+    "Year":1994,
+    "Medals":"Bronze",
+    "Sport":"Alpine skiing",
+    "Event":"Men's downhill",
+    "Gender":"M",
+    "Date":""
+  },
+  {
+    "Year":1994,
+    "Medals":"Gold",
+    "Sport":"Biathlon",
+    "Event":"Women's 7.5 km sprint",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1994,
+    "Medals":"Gold",
+    "Sport":"Biathlon",
+    "Event":"Women's 15 km",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1994,
+    "Medals":"Silver",
+    "Sport":"Figure skating",
+    "Event":"Men's singles",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1994,
+    "Medals":"Bronze",
+    "Sport":"Figure skating",
+    "Event":"Pairs",
+    "Date":"",
+    "Gender":"MW"
+  },
+  {
+    "Year":1994,
+    "Medals":"Gold",
+    "Sport":"Freestyle skiing",
+    "Event":"Men's moguls",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1994,
+    "Medals":"Silver",
+    "Sport":"Freestyle skiing",
+    "Event":"Men's aerials",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1994,
+    "Medals":"Bronze",
+    "Sport":"Freestyle skiing",
+    "Event":"Men's aerials",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1994,
+    "Medals":"Silver",
+    "Sport":"Ice hockey",
+    "Event":"Men's competition",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1994,
+    "Medals":"Silver",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 1000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1994,
+    "Medals":"Silver",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 3000 m relay",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1994,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 1000 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1994,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Women's 500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Gold",
+    "Sport":"Bobsleigh",
+    "Event":"Two-man",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Gold",
+    "Sport":"Curling",
+    "Event":"Women's competition",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Silver",
+    "Sport":"Curling",
+    "Event":"Men's competition",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Silver",
+    "Sport":"Figure skating",
+    "Event":"Men's singles",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Silver",
+    "Sport":"Ice hockey",
+    "Event":"Women's competition",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Gold",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 5000 m relay",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Gold",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 3000 m relay",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 1000 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Gold",
+    "Sport":"Snowboarding",
+    "Event":"Men's giant slalom",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Gold",
+    "Sport":"Speed skating",
+    "Event":"Women's 500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Men's 500 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Women's 500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":1998,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Men's 500 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":1998,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 1000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Cross-country skiing",
+    "Event":"Women's 10 km pursuit",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Silver",
+    "Sport":"Curling",
+    "Event":"Men's",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Curling",
+    "Event":"Women's",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Figure skating",
+    "Event":"Pairs",
+    "Date":"",
+    "Gender":"MW"
+  },
+  {
+    "Year":2002,
+    "Medals":"Silver",
+    "Sport":"Freestyle skiing",
+    "Event":"Women's aerials",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Freestyle skiing",
+    "Event":"Women's aerials",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Ice hockey",
+    "Event":"Men's competition",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Ice hockey",
+    "Event":"Women's competition",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 500 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 5000 m relay",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Silver",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 500 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 1000 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 1500 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 3000 m relay",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Gold",
+    "Sport":"Speed skating",
+    "Event":"Women's 500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 3000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2002,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 5000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Bobsleigh",
+    "Event":"Two-man",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Cross country skiing",
+    "Event":"Women's team sprint",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Cross-country skiing",
+    "Event":"Women's sprint",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Curling",
+    "Event":"Men's",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Curling",
+    "Event":"Women's",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Figure skating",
+    "Event":"Men's singles",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Freestyle skiing",
+    "Event":"Women's moguls",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Ice hockey",
+    "Event":"Women's",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 500 m",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Short track speed skating",
+    "Event":"Men's 5000 m relay",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 3000 m relay",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Short track speed skating",
+    "Event":"Women's 500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Skeleton",
+    "Event":"Men's",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Skeleton",
+    "Event":"Men's",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Skeleton",
+    "Event":"Women's",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Snowboarding",
+    "Event":"Women's snowboard cross",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Speed skating",
+    "Event":"Women's 1500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Gold",
+    "Sport":"Speed skating",
+    "Event":"Women's 5000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Men's team pursuit",
+    "Date":"",
+    "Gender":"M"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Women's team pursuit",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Women's 1000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Women's 1500 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 3000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2006,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 5000 m",
+    "Date":"",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Bobsleigh",
+    "Event":"Two-woman",
+    "Date":"February 24",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Bobsleigh",
+    "Event":"Two-woman",
+    "Date":"February 24",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Bronze",
+    "Sport":"Bobsleigh",
+    "Event":"Four-man",
+    "Date":"February 27",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Curling",
+    "Event":"Men's",
+    "Date":"February 27",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Curling",
+    "Event":"Women's",
+    "Date":"February 26",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Figure skating",
+    "Event":"Ice dancing",
+    "Date":"February 22",
+    "Gender":"MW"
+  },
+  {
+    "Year":2010,
+    "Medals":"Bronze",
+    "Sport":"Figure skating",
+    "Event":"Women's singles",
+    "Date":"February 25",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Freestyle skiing",
+    "Event":"Men's moguls",
+    "Date":"February 14",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Freestyle skiing",
+    "Event":"Women's ski cross",
+    "Date":"February 23",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Freestyle skiing",
+    "Event":"Women's moguls",
+    "Date":"February 13",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Ice hockey",
+    "Event":"Women's tournament",
+    "Date":"February 25",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Ice hockey",
+    "Event":"Men's tournament",
+    "Date":"February 28",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Short track",
+    "Event":"Men's 500 metres",
+    "Date":"February 26",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Short track",
+    "Event":"Men's 5000 metre relay",
+    "Date":"February 26",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Short track",
+    "Event":"Women's 500 metres",
+    "Date":"February 17",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Short track",
+    "Event":"Women's 3000 metre relay",
+    "Date":"February 24",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Bronze",
+    "Sport":"Short track",
+    "Event":"Men's 500 metres",
+    "Date":"February 26",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Skeleton",
+    "Event":"Men's",
+    "Date":"February 19",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Snowboarding",
+    "Event":"Women's snowboard cross",
+    "Date":"February 16",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Snowboarding",
+    "Event":"Men's parallel giant slalom",
+    "Date":"February 27",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Snowboarding",
+    "Event":"Men's snowboard cross",
+    "Date":"February 15",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Speed skating",
+    "Event":"Women's 1000 metres",
+    "Date":"February 18",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Gold",
+    "Sport":"Speed Skating",
+    "Event":"Men's team pursuit",
+    "Date":"February 27",
+    "Gender":"M"
+  },
+  {
+    "Year":2010,
+    "Medals":"Silver",
+    "Sport":"Speed skating",
+    "Event":"Women's 1500 metres",
+    "Date":"February 21",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 3000 metres",
+    "Date":"February 14",
+    "Gender":"W"
+  },
+  {
+    "Year":2010,
+    "Medals":"Bronze",
+    "Sport":"Speed skating",
+    "Event":"Women's 5000 metres",
+    "Date":"February 24",
+    "Gender":"W"
+  }
+];
+
+// Firm data
+	var previousOlympics = [
+		{
+			'Games':'NAGANO',
+			'Medals':15
+		},
+		{
+			'Games':'SALT LAKE',
+			'Medals':17
+		},
+		{
+			'Games':'TURIN',
+			'Medals':24
+		},
+		{
+			'Games':'VAN.',
+			'Medals':26
+		}
+	];
+	
+// Fixed variables
+	var width = 800,
+		height = 2000,
+		size = 20,
+		maxBorder = width-size,
+		spacing = 2.5;
+
+// Arrays
+	var colours = ['white','#9d5e1a','#b4b4b4','#e3c01b'],
+		medalNames = ['','Gold','Silver','Bronze'],
+		strokeColours = ['#c2c2c2','#724718','#9a9696','#c9ab20'],
+		years = [],
+		medalsByYear = [];
+
+// Variables that change
+getXCountStart = function(){
+	return (width/2)/(size+spacing)
+}
+	var xCount = getXCountStart(),
+		yCount = 0,
+		rowLength = 0;
+		xAlt = false,
+		lastGender = 0; 
+
+// Set up data
+var lastTeam = '',
+	lastEvent = '';
+$.each(canadaMedals,function(i,medal){
+/*
+	if(lastTeam != '' && medal["Team members"] != '' && (lastEvent == medal.Event)){
+		// Skip
+		console.log('slip');
+	} else {
+*/
+		if(jQuery.inArray(medal.Year,years) < 0) years.push(medal.Year), medalsByYear[medal.Year] = [];
+		medalsByYear[medal.Year].push(medal);
+		console.log(i,medal.Gender,medal);
+		var newMedal = {
+		    "Year":medal.Year,
+		    "Medals":medal.Medal,
+		    "Sport":medal.Sport,
+		    "Event":medal.Event,
+		    "Date":medal.Date,
+		    "Gender":medal.Gender
+	  }
+//	}
+	lastEvent = medal.Event;
+	lastTeam = medal["Team members"];
+});
+// Get max length
+var maxDataLength = 0;
+$.each(years,function(i,year){
+	var arr = medalsByYear[year];
+	if(arr.length > maxDataLength) maxDataLength = arr.length;
+})
+// Append blanks to fill in all arrays to match maximum
+$.each(years,function(i,year){
+	var arr = medalsByYear[year];
+	for(var i = 0;i<maxDataLength-1;i++){
+		if(typeof arr[i] == 'undefined') arr[i] = [];
+	}
+})
+
+// Create the canvas
+	var svg = d3.select("#viz").selectAll("svg")
+			.data(d3.range(0,1))
+		.enter().append("svg")
+			.attr("width",width)
+			.attr("height",height);
+	
+// Coordinate functions 
+	function getX(d,i){
+		// If not a medal, go across
+		if(d.Medals == 'Silver'){
+
+		} else if(d.Medals == 'Gold'){
+				xCount--;
+		} else if(d.Medals == 'Bronze') {
+				xCount++;
+		}
+		var returnX = (size*xCount)+(spacing*xCount);
+		rowLength++;
+		lastGender = d.Gender;
+		return returnX;
+	}
+	function getY(d,i){
+		var firstMedal = false;
+		// If a medal, go down
+		if(d.Medal != 0) yCount++;
+		var returnY = (yCount*size)+(spacing*yCount);
+		return returnY;
+	}
+
+// Animation function
+	function changeData(data){
+		// Reset variables
+		xCount = (width/2)/(size+spacing),
+		yCount = 0,
+		rowLength = 0,
+		xAlt = false;
+		// Animate items
+		d3.selectAll(".medal")
+			.data(data).transition()
+			.duration(750)
+			.attr("transform", function(d,i) { return "translate(" + getX(d,i) + "," + getY(d,i) + ")"; });
+			
+		d3.selectAll(".circle")
+			.data(data).transition()
+				.duration(750)
+			.attr("fill",function(d){ return colours[jQuery.inArray(d.Medals,medalNames)]; })
+			.attr("stroke",function(d){ return strokeColours[d.Medal]; })
+			.attr("opacity",function(d){ if(d.length == 0) { return 0; } else { return 1; } });
+		
+/*
+
+		d3.selectAll('.text')
+			.data(data).transition()
+				.duration(750)
+			.text(function(d){ return d.Gender; });
+*/
+
+	}
+	
+// Create the hashmarks
+	var hashmark = svg.selectAll(".hashmark")
+			.data(previousOlympics)
+		.enter().append("rect")
+			.attr("width",width-40)
+			.attr("height",1)
+			.attr("fill","#eee")
+			.attr("stroke","none")
+			.attr("x",40)
+			.attr("y",function(d,i){ return (d.Medals*size)+(d.Medals*spacing); });
+
+// Create the labels for the hashmarks
+	var labels = svg.selectAll(".label")
+			.data(previousOlympics)
+		.enter().append("svg:text")
+			.attr("fill","#b0b0b0")
+			.attr('font-size','10px')
+			.attr('font-family','sans-serif')
+			.attr("x",40)
+			.attr("y",function(d,i){ return (d.Medals*size)+(d.Medals*spacing)-2; })
+			.text(function(d){ return d.Medals + " - " + d.Games; });
+
+// Create other legends and notes
+	var topLine = svg.append('rect')
+		.attr('width',width-40)
+		.attr('height',1)
+		.attr('fill','#eee')
+		.attr('stroke','none')
+		.attr('x',40)
+		.attr('y',1);
+	var centerLine = svg.append('rect')
+		.attr('width',1)
+		.attr('height',height)
+		.attr('fill','#eee')
+		.attr('stroke','none')
+		.attr('x',width/2)
+		.attr('y',0);
+	var moreBronze = svg.append('text')
+		.attr('x',width/4)
+		.attr('y',15)
+		.text('MORE BRONZE')
+		.attr('fill','#b0b0b0')
+		.attr('font-family','sans-serif')
+		.attr('font-size',10);
+	var moreGold = svg.append('text')
+		.attr('x',(width/4)*3)
+		.attr('y',15)
+		.text('MORE GOLD')
+		.attr('fill','#b0b0b0')
+		.attr('font-family','sans-serif')
+		.attr('font-size',10);
+		
+// Create the nodes
+	var medal = svg.selectAll(".medal")
+		.data(medalsByYear[years[0]])
+	.enter().append("g")
+		.attr('class','medal')
+		.attr("transform", function(d,i) { return "translate(" + getX(d,i) + "," + getY(d,i) + ")"; });
+	
+	medal.append("circle")
+		.attr('class','circle')
+		.attr("r",size/2)
+		.attr("fill",function(d){ return colours[jQuery.inArray(d.Medals,medalNames)]; })
+		.attr("stroke",function(d){ return strokeColours[d.Medal]; })
+		.attr("stroke-width","0.5")
+		.attr("opacity",function(d){ if(d.length == 0) { return 0; } else { return 1; } });
+		/*
+
+	medal.append("svg:text")
+		.attr('class','text')
+		.text(function(d){ return d.Gender; });
+*/
+
+
+
+// Controls
+	var yearTrack = 1;
+	$('#viz').click(function(){
+		changeData(medalsByYear[years[yearTrack]]);
+		$('#year').text(years[yearTrack]);
+		yearTrack++;
+	})
+})
+</script>
+<center><img src="globeolympics-assets/pathicon.png" /></center>
+<h1>Path to the Podium</h1>
+<p>Canada has earned progressively more medals each year at the Olympics since Nagano, earning 26 in Vancouver. But what path did Canadian athletes take to get there? This chart shows the number of bronze, silver and gold medals earned each year. Each bronze medal turns the path left while every gold medal turns the path to the right.</p>
+<p>
+</p>
+<!--
+<span id="year">1924</span>
+<a href="#go" id="go">Go</a>
+-->
+<div id="viz">
+
+</div>
